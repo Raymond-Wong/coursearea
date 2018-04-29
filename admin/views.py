@@ -14,6 +14,14 @@ from coursearea.decorator import *
 from coursearea.models import Series, Course, Image
 from coursearea.settings import ADMIN_CONFIG
 
+'''路由转发
+'''
+@handler
+@get_only
+@admin
+def index(request):
+  pass
+
 '''上传图片
 '''
 @csrf_exempt
@@ -121,7 +129,7 @@ def get_series_detail(request):
 @admin
 def get_course_list(request):
   series_id = coursearea.utils.parse_arg(request.GET, 'series_id', None, None, lambda x:(x is None or Course.objects.filter(id=x).count() > 0))
-  if series_id = None:
+  if series_id == None:
     courses_obj = Course.objects.all()
   else:
     courses_obj = Series.objects.get(id=series_id).course_set()
@@ -139,7 +147,7 @@ def get_course_detail(request):
   course_id = coursearea.utils.parse_arg(request.GET, 'course_id', None, long, lambda x:Course.objects.filter(id=x).count() > 0)
   course_obj = Course.objects.get(id=course_id)
   course = dict()
-  course['info'] = dict(name=course_obj.info.name, desc=course_obj.info.desc, price=course_obj.info.price, status=-course_obj.info.status
+  course['info'] = dict(name=course_obj.info.name, desc=course_obj.info.desc, price=course_obj.info.price, status=-course_obj.info.status,
                         cover_url=course_obj.info.cover_url, teacher=dict(name=course_obj.info.teacher.name, avatar=course_obj.info.teacher.avatar, desc=course_obj.info.teacher.desc))
   course['group'] = dict(name=course_obj.group.name, avatar=course_obj.group.avatar, desc=course_obj.group.desc, link=course_obj.group.link)
   course['series'] = dict(id=course_obj.series.id, name=course_obj.series.name, term_length=course_obj.series.term_length, cover_url=course_obj.series.cover_url)

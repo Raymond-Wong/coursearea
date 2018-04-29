@@ -17,7 +17,7 @@ def handler(view):
     try:
       return view(request, *args, **kwargs)
     except utils.InvalidArgError as e:
-      logging.error('请求参数错误：%s' % e)
+      logging.error(u'请求参数错误：' + unicode(e).decode("unicode-escape"))
       return HttpResponse(utils.Response(code=-3, msg='请求参数错误：%s' % e).to_json(), content_type='application/json')
     except Exception as e:
       logging.error('未知错误:\n' + traceback.format_exc())
@@ -75,7 +75,7 @@ def accessible(view):
 '''
 def admin(view):
   def inner(request, *args, **kwargs):
-    if len(request.session['admin']) == 0 or request.session['admin'][-1].status == 0:
+    if request.session.has_key('admin') and (len(request.session['admin']) == 0 or request.session['admin'][-1].status == 0):
       return view(request, *args, **kwargs)
     data = dict(redirect='/admin/index')
     return HttpResponseRedirect('/admin/user/login?' + urlencode(data))

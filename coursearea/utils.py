@@ -52,8 +52,8 @@ def parse_arg(args, name, default, _type=None, _filter=None):
     # 尝试强制转换
     try:
       value = _type(value)
-    except:
-      raise InvalidArgError('参数类型错误！参数（%s）需要符合类型（%s）' % (name, _type))
+    except Exception as e:
+      raise InvalidArgError(u'参数类型错误！参数（%s）需要符合类型（%s）' % (name, _type))
   # 尝试过滤
   if _filter is None:
     return value
@@ -62,9 +62,10 @@ def parse_arg(args, name, default, _type=None, _filter=None):
   try:
     if _filter(value):
       return value
-  except:
+  except Exception as e:
+    print e
     pass
-  raise InvalidArgError('无效参数！')
+  raise InvalidArgError(u'无效参数（%s）' % name)
 
 '''错误参数异常
 '''
@@ -133,3 +134,12 @@ def update_token():
   token_record.save()
   logging.debug('更新数据库中的access token: %s' % token_record.token)
   return token_record
+
+'''获取或创建对象
+'''
+def get_or_create(obj, target, default):
+  try:
+    return target(obj)
+  except:
+    pass
+  return default

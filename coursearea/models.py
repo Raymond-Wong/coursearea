@@ -25,7 +25,7 @@ class User(models.Model):
   city = models.CharField(max_length=50, default='')
   province = models.CharField(max_length=50, default='')
   country = models.CharField(max_length=50, default='')
-  avatar = models.URLField(null=True, default=None)
+  avatar = models.URLField(null=True, default=None, max_length=500)
   language = models.TextField(max_length=50, default='')
 
 '''课程讲师
@@ -52,9 +52,9 @@ class Course_Info(models.Model):
   desc = models.TextField()
   price = models.PositiveIntegerField()
   status = models.CharField(max_length=200)
-  cover_url = models.URLField(null=True, default=None)
+  cover_url = models.URLField(null=True, default=None, max_length=500)
   teacher = models.ForeignKey(Teacher)
-  resource = models.URLField(null=True, default=None)
+  resource = models.URLField(null=True, default=None, max_length=500)
 
 '''课程样式
 '''
@@ -65,7 +65,7 @@ class Course_Style(models.Model):
   qrcode_x = models.FloatField(default=0)
   qrcode_y = models.FloatField(default=0)
   qrcode_size = models.FloatField(default=0)
-  bg = models.URLField(null=True)
+  bg = models.URLField(null=True, default=None, max_length=500)
 
 
 '''课程组
@@ -78,7 +78,7 @@ class Group(models.Model):
   name = models.CharField(max_length=50)
   avatar = models.TextField()
   desc = models.TextField()
-  link = models.URLField(null=True, default=None)
+  link = models.URLField(null=True, default=None, max_length=500)
 
 '''系列
 name        : 名称
@@ -87,7 +87,7 @@ term_length : 系列总长度
 class Series(models.Model):
   name = models.CharField(max_length=50)
   term_length = models.PositiveIntegerField()
-  cover_url = models.URLField(null=True, default=None)
+  cover_url = models.URLField(null=True, default=None, max_length=500)
   unlock_num = models.PositiveIntegerField(default=1)
   create_time = models.DateTimeField(auto_now_add=True)
 

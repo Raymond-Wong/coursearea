@@ -103,9 +103,6 @@ def get_audition_list(request, user):
 @handler
 @post_only
 def wechat_user_login(request):
-  import json
-  logging.info(json.dumps(request.POST, ensure_ascii=False))
-  return HttpResponse(Response(msg=json.dumps(request.POST)).to_json(), content_type='application/json')
   code = coursearea.utils.parse_arg(request.POST, 'code', None, str, None)
   nickname = coursearea.utils.parse_arg(request.POST, 'nickname', None, str, None)
   gender = coursearea.utils.parse_arg(request.POST, 'gender', 1, int, lambda x:x in [0, 1, 2])

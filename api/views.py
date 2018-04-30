@@ -113,7 +113,7 @@ def wechat_user_login(request):
   language = coursearea.utils.parse_arg(request.POST, 'language', 'zh_CN', str, None)
   # 更新登录状态
   status, resp = coursearea.utils.send_request('api.weixin.qq.com', 
-    '/sns/jscode2session', 'GET', to_load=True,
+    '/sns/jscode2session', 'GET', toLoad=True,
     params=dict(appid=APPID, secret=APPSECRET, js_code=code, grant_type='authorization_code'))
   if not status:
     return HttpResponse(Response(code=1, msg='更新用户会话标识失败').to_json(), content_type='application/json')

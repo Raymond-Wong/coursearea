@@ -5,8 +5,8 @@ from os import environ
 import logging
 logging.basicConfig(format='[%(levelname)s][%(pathname)s][%(asctime)s]\t%(message)s', datefmt="%H:%M:%S")
 
-APPID = ''
-APPSECRET = ''
+APPID = 'wx395e0a3781bb73fc'
+APPSECRET = '315dee17b7c75f1f8c214ef2a25a40b0'
 ADMIN_CONFIG = dict(retry_freq=(3 * 60, 5, 5 * 60), account='wechooser', passwd='wechooser')
 REMOTE = not environ.get("APP_NAME", "")
 if REMOTE:

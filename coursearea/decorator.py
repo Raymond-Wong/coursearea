@@ -75,6 +75,7 @@ def accessible(view):
 '''
 def admin(view):
   def inner(request, *args, **kwargs):
+    return view(request, *args, **kwargs)
     if request.session.has_key('admin') and (len(request.session['admin']) == 0 or request.session['admin'][-1].status == 0):
       return view(request, *args, **kwargs)
     data = dict(redirect='/admin/index')

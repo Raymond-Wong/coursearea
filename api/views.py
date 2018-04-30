@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 '''基础python模块'''
 import logging
+import json
 '''django模块'''
 from django.http import HttpResponse
 from django.db.models import Count

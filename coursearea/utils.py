@@ -5,6 +5,7 @@ from datetime import datetime, date
 import httplib
 import urllib
 import hashlib
+import logging
 '''django模块'''
 import django.db.models
 from django.core import serializers

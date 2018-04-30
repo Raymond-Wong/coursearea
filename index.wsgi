@@ -1,5 +1,5 @@
 import sae
-sae.add_vendor_dir('packages')
+# sae.add_vendor_dir('packages')
 
 from coursearea import wsgi
 

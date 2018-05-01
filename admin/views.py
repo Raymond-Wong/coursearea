@@ -252,7 +252,7 @@ def set_course_detail(request):
   course.is_selected = coursearea.utils.parse_arg(request.POST, 'is_selected', course.is_selected, bool, None)
   course.is_banner = coursearea.utils.parse_arg(request.POST, 'is_banner', course.is_banner, bool, None)
   # 设置推荐课程
-  recommend_courses = coursearea.utils.parse_arg(request.POST, 'recommend_courses', None, None, lambda x:((x is None and MODE == 'edit') or isinstance(json.loads(x), list)))
+  recommend_courses = coursearea.utils.parse_arg(request.POST, 'recommend_courses', None, None, lambda x:(x is None or isinstance(json.loads(x), list)))
   if recommend_courses is not None:
     recommend_courses = json.loads(recommend_courses)
     try:
